@@ -1,0 +1,69 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+import java.io.File;
+import java.io.PrintStream;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class PlaneManagement {
+   private static final int rows = 4;
+   private static final int[] seats_per_row = new int[]{14, 12, 12, 14};
+   private static final int AVAILABLE = 0;
+   private static final int SOLD = 1;
+   private static final int[][] seats = new int[4][];
+   private static final Ticket[] tickets = new Ticket[52];
+   private static int ticketIndex = 0;
+
+   public PlaneManagement() {
+   }
+
+   public static void main(String[] args) {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Welcome to the Plane Management application");
+      firstnameSeats();
+      showMenu();
+
+      int option;
+      do {
+         try {
+            System.out.print("Please select an option: ");
+            option = input.nextInt();
+            switch (option) {
+               case 0:
+                  System.out.println("Exiting the program. Goodbye!");
+                  break;
+               case 1:
+                  buySeat(input);
+                  showMenu();
+                  break;
+               case 2:
+                  cancelSeat(input);
+                  showMenu();
+                  break;
+               case 3:
+                  find_first();
+                  showMenu();
+                  break;
+               case 4:
+                  show_seating_plan();
+                  showMenu();
+                  break;
+               case 5:
+                  printTicketsInfo();
+                  showMenu();
+                  break;
+               case 6:
+                  searchTicket(input);
+                  showMenu();
+                  break;
+               default:
+                  System.out.println("Invalid option. Please select 0, 1, 2, 3, 4, 5, or 6.");
+            }
+         } catch (InputMismatchException var4) {
+            System.out.println("Invalid input. Please enter a number (0, 1, 2, 3, 4, 5, or 6): ");
+            input.nextLine();
+            option = -1;
+         }
+      } while(option != 0);
+
+      input.close();
+   }
