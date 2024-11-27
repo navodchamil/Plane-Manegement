@@ -1,1 +1,38 @@
 
+
+    private static void showMenu() {
+        char x = '*';
+        String y = " ";
+
+        // Print a line of 50 asterisks
+        for (int i = 0; i < 50; i++) {
+            System.out.print(x);
+        }
+        System.out.println();
+        System.out.print(x);
+        for (int i = 0; i < 18; i++) {
+            System.out.print(y);
+        }
+        System.out.print("MENU OPTIONS");
+        for (int i = 0; i < 18; i++) {
+            System.out.print(y);
+        }
+        System.out.println(x);
+
+        for (int i = 0; i < 50; i++) {
+            System.out.print(x);
+        }
+        System.out.println();
+        System.out.println("     1) Buy a seat");
+        System.out.println("     2) Cancel a seat");
+        System.out.println("     3) Find first available seat");
+        System.out.println("     4) Show seating plan");
+        System.out.println("     5) Print tickets information and total sales");
+        System.out.println("     6) Search ticket");
+        System.out.println("     0) Quit");
+        // Print a line of 50 asterisks
+        for (int i = 0; i < 50; i++) {
+            System.out.print(x);
+        }
+        System.out.println();
+    }
