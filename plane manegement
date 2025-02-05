@@ -104,3 +104,12 @@ public class PlaneManagement {
         }
         System.out.println();
     }
+   // Method to initialize all seats as available
+    private static void firstnameSeats() {
+        for (int n = 0; n < rows; n++) {
+            seats[n] = new int[seats_per_row[n]];
+            for (int k = 0; k < seats_per_row[n]; k++) {
+                seats[n][k] = AVAILABLE;
+            }
+        }
+    }
