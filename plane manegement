@@ -187,3 +187,50 @@ public class PlaneManagement {
             scanner.nextLine(); // Clear the input buffer
         }
     }
+   // Method to cancel a seat
+    private static void cancelSeat(Scanner scanner) {
+        // Prompt user for row letter and seat number
+        System.out.print("Enter row letter (A, B, C, or D): ");
+        String inputRow = scanner.next().toUpperCase(); // Convert input to uppercase
+        char rowLetter;
+
+        // Validate row letter
+        if (inputRow.length() != 1 || inputRow.charAt(0) < 'A' || inputRow.charAt(0) > 'D') {
+            System.out.println("Invalid row letter. Please enter A, B, C, or D.");
+            return;
+        } else {
+            rowLetter = inputRow.charAt(0);
+        }
+
+        System.out.print("Enter seat number: ");
+        try {
+            int seatNumber = scanner.nextInt();
+
+            // Validate row and seat number
+            int rowIndex = getRowIndex(rowLetter);
+            if (rowIndex == -1 || seatNumber < 1 || seatNumber > seats_per_row[rowIndex]) {
+                System.out.println("Invalid input. if Rows are A or D enter number between 1 to 14  and  if Rows are B or C number between 1 to 12 .");
+                return;
+            }
+
+            // Check if seat was previously bought
+            if (seats[rowIndex][seatNumber - 1] == AVAILABLE) {
+                System.out.println("This seat has not been booked yet. There is nothing to cancel.");
+                return;
+            }
+            // delete file after cancel a seat
+            delete_file(String.valueOf(rowLetter), seatNumber);
+
+            // Mark seat as available (0)
+            seats[rowIndex][seatNumber - 1] = AVAILABLE;
+            System.out.println("Seat " + rowLetter + seatNumber + " has been successfully cancelled and made available.");
+            System.out.println("seat  "+rowLetter+seatNumber+" .text file has been deleted. ");
+
+            // Remove the canceled ticket from the tickets array
+            cancelTicket(rowIndex, seatNumber);
+
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Seat number must be a number.");
+            scanner.nextLine(); // Clear the input buffer
+        }
+    }
