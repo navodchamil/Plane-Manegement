@@ -234,3 +234,30 @@ public class PlaneManagement {
             scanner.nextLine(); // Clear the input buffer
         }
     }
+//delete a text file after cancel a seat
+    public static void delete_file(String row, int seatNum) {
+        File file = new File(row + seatNum + ".txt");
+        if (file.exists()) {
+            file.delete();
+
+        }
+    }
+    //remove a ticket from the collection of tickets.
+    private static void cancelTicket(int rowIndex, int seatNumber) {
+        for (int n = 0; n < ticketIndex; n++) {
+            Ticket ticket = tickets[n];
+            if (ticket.getRow() == rowIndex && ticket.getSeat() == seatNumber) {
+                //Determine the refund amount by using the ticket's purchase price.
+                double refundedAmount = ticket.getPrice();
+                System.out.println("Refunded amount: £" + refundedAmount);
+
+                // Tickets in the array should be shifted to make up the space left by the removed ticket.
+                for (int k = n; k < ticketIndex - 1; k++) {
+                    tickets[k] = tickets[k + 1];
+                }
+                tickets[--ticketIndex] = null; // Lower ticketIndex by one and give the last element null.
+                return; // Exit the loop after removing the ticket
+            }
+        }
+    }
+
